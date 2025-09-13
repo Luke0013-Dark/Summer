@@ -7,7 +7,7 @@ import google.generativeai as genai
 
 # LINE Bot API configuration
 CHANNEL_ACCESS_TOKEN = "1b03475340e1479f2e396fc85491134a"
-REPLY_TOKEN = "ZeFa2KBQj5Xt2aMb2Xhz88v4Nj93zMJ6TgKbDi2sVBWBgOVZYjbvBPcwKd6mH1OU5eHVgJhVgffNHDHIaETXklASefm73Qtb+2t1Rw/R0msEtlNpd2jiHmBFAHNkqAU0moK4DaH3PmxRXM2T1HhN/gdB04t89/1O/w1cDnyilFU="
+REPLY_TOKEN = "E/1IgJu+jDjDhYJsPmvCRsozNANgqGNh2CA4FAa5lxRqkNnbGWmV76bvCjXV4Q64jGesR9dT+BV6zwaTnod/nhFFVzlZ0yI6B2kfQBXp/uaPhB7P/Njx7dY85V7ZM5XtsDYsg6cMZnWZE33HlCSZJgdB04t89/1O/w1cDnyilFU="
 
 # LINE Bot API endpoints
 LINE_API_URL = "https://api.line.me/v2/bot/message/reply"
