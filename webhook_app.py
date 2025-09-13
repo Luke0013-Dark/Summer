@@ -119,12 +119,19 @@ def index():
         head(title("LINE Bot Webhook")),
         body(
             h1("LINE Bot Webhook Server"),
-            p("Server is running and ready to receive webhooks"),
-            p(f"Webhook endpoint: /webhook"),
-            p(f"Channel Access Token: {CHANNEL_ACCESS_TOKEN[:10]}..."),
-            p(f"Reply Token: {REPLY_TOKEN[:20]}...")
+            p("✅ Server is running and ready to receive webhooks"),
+            p(f"📡 Webhook endpoint: /webhook"),
+            p(f"🔑 Channel Access Token: {CHANNEL_ACCESS_TOKEN[:10]}..."),
+            p(f"🔑 Reply Token: {REPLY_TOKEN[:20]}..."),
+            p(f"🏥 Health check: OK"),
+            p(f"⏰ Status: {os.environ.get('PORT', '5000')}")
         )
     )
+
+@get("/health")
+def health():
+    """Simple health check for Railway"""
+    return json({"status": "healthy", "message": "LINE Bot webhook is running"})
 
 @post("/webhook")
 def webhook(request: Request):
@@ -298,6 +305,9 @@ if __name__ == "__main__":
     # FastHTML default port is 5000
     port = int(os.environ.get("PORT", 5000))
     print(f"🚀 Starting FastHTML webhook server on port {port}")
-    print(f"📡 Webhook endpoint: http://localhost:{port}/webhook")
-    print(f"🔗 Test endpoint: http://localhost:{port}/test")
-    run(port=port)
+    print(f"📡 Webhook endpoint: http://0.0.0.0:{port}/webhook")
+    print(f"🔗 Test endpoint: http://0.0.0.0:{port}/test")
+    print(f"🏥 Health check: http://0.0.0.0:{port}/")
+    
+    # Start server with proper host binding for Railway
+    run(host="0.0.0.0", port=port)
