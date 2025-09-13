@@ -9,8 +9,12 @@ import google.generativeai as genai
 app = Flask(__name__)
 
 # LINE Bot API configuration
-CHANNEL_ACCESS_TOKEN = "1b03475340e1479f2e396fc85491134a"
+CHANNEL_ACCESS_TOKEN = os.environ.get("LINE_CHANNEL_ACCESS_TOKEN", "1b03475340e1479f2e396fc85491134a")
 REPLY_TOKEN = "E/1IgJu+jDjDhYJsPmvCRsozNANgqGNh2CA4FAa5lxRqkNnbGWmV76bvCjXV4Q64jGesR9dT+BV6zwaTnod/nhFFVzlZ0yI6B2kfQBXp/uaPhB7P/Njx7dY85V7ZM5XtsDYsg6cMZnWZE33HlCSZJgdB04t89/1O/w1cDnyilFU="
+
+# Log configuration on startup
+print(f"🔑 Using Channel Access Token: {CHANNEL_ACCESS_TOKEN[:10]}...")
+print(f"🔑 Using Reply Token: {REPLY_TOKEN[:20]}...")
 
 # LINE Bot API endpoints
 LINE_API_URL = "https://api.line.me/v2/bot/message/reply"
