@@ -4,27 +4,15 @@ FROM python:3.11-slim
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies including libxrender1
+# Install only the most essential packages for OCR
 RUN apt-get update && apt-get install -y \
     libxrender1 \
     libfontconfig1 \
     libfreetype6 \
     libjpeg62-turbo \
     libpng16-16 \
-    libtiff5 \
-    libopenjp2-7 \
+    libtiff6 \
     libwebp7 \
-    libharfbuzz0b \
-    libfribidi0 \
-    libx11-6 \
-    libxext6 \
-    libxss1 \
-    libxrandr2 \
-    libasound2 \
-    libpangocairo-1.0-0 \
-    libatk1.0-0 \
-    libcairo-gobject2 \
-    libgtk-3-0 \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements first for better caching
