@@ -8,7 +8,8 @@ import io
 import base64
 
 # Configure Google GenAI
-genai.configure(api_key="AIzaSyB-xxx-k")
+api_key = os.environ.get("GEMINI_API_KEY", "AIzaSyB-xxx-k")
+genai.configure(api_key=api_key)
 
 # Initialize the model
 model = genai.GenerativeModel('gemini-1.5-flash')
@@ -224,5 +225,6 @@ def upload_file(file: UploadFile):
         )
 
 if __name__ == "__main__":
-    # Run on port 3000 as specified in FastHTML documentation
-    run(port=3000)
+    # Use Railway's PORT environment variable or default to 3000
+    port = int(os.environ.get("PORT", 3000))
+    run(port=port)

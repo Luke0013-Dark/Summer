@@ -38,8 +38,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY app.py .
 
-# Expose port 3000 (as specified in FastHTML documentation)
-EXPOSE 3000
+# Expose port (Railway will set PORT env var)
+EXPOSE $PORT
 
 # Run the application
 CMD ["python", "app.py"]
