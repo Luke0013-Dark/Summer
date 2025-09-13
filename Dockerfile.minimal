@@ -4,7 +4,7 @@ FROM python:3.11-slim
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies including libxrender1
+# Install only essential system dependencies
 RUN apt-get update && apt-get install -y \
     libxrender1 \
     libfontconfig1 \
