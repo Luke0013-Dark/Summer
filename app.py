@@ -11,7 +11,9 @@ app = Flask(__name__)
 app.secret_key = 'your-secret-key-here'
 
 # Configure Google GenAI
-api_key = os.environ.get("GEMINI_API_KEY", "AIzaSyB-xxx-k")
+api_key = os.environ.get("GEMINI_API_KEY")
+if not api_key:
+    raise ValueError("GEMINI_API_KEY environment variable is required. Please set it in Railway dashboard.")
 genai.configure(api_key=api_key)
 
 # Initialize the model
@@ -33,6 +35,9 @@ def extract_text_from_image(image_data):
         
         # Use Gemini to extract text
         response = model.generate_content([prompt, {"mime_type": "image/png", "data": img_base64}])
+        
+        if not response.text:
+            return "No text could be extracted from the image."
         
         return response.text
     except Exception as e:
@@ -270,6 +275,15 @@ def upload_file():
         return redirect(url_for('index'))
 
 if __name__ == "__main__":
+    # Validate API key on startup
+    try:
+        # Test the API key by making a simple request
+        test_response = model.generate_content("Hello")
+        print("✅ Google GenAI API key is valid")
+    except Exception as e:
+        print(f"❌ Google GenAI API key validation failed: {str(e)}")
+        print("Please set a valid GEMINI_API_KEY environment variable in Railway dashboard")
+    
     # Use Railway's PORT environment variable or default to 3000
     port = int(os.environ.get("PORT", 3000))
     app.run(host='0.0.0.0', port=port, debug=False)
